@@ -36,7 +36,15 @@ public class DatabaseService {
     }
     public User getUserByAnyInfo(String param){
         String [] params = param.split("!:!");
-        if(Users.checkUser(params[0].trim())) return Users.getUser(params[0]);
-        return Users.getUser(params[1]);
+        for(String par : params){
+            if(par==null||par.trim().equals("")) continue;
+            System.out.println("first condition");
+            if(par.trim().equals("*name*")||par.trim().equals("**@gmail.com")) continue;
+            System.out.println("second condition");
+            if (Users.checkUser(par.trim())){
+                return Users.getUser(par);
+            }
+        }
+        return null;
     }
 }

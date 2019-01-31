@@ -22,6 +22,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "\n ID "+id+"\nName: "+name+"\n Gmail: "+gmail+"\nDate of registration: "+date.toString()+"</h2>";
+        return "<br><h3>ID: "+id+"<br>Name: "+name+"<br> Gmail: "+gmail+
+                "<br>Date of registration: "+date.toString()+"</h3>";
     }
 }

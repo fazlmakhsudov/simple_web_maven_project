@@ -29,35 +29,42 @@ public class UsersServlet extends HttpServlet {
         } catch (Exception e) {
 
         }
-        pr.print(action+" "+name+"  "+password+"  "+gmail+"\n");
         DatabaseService service = new DatabaseService();
         service.initialize();
+        StringBuilder sb = new StringBuilder();
         if(action.equals("Login")){
             boolean flag =service.login(name,password);
             if(flag){
-                pr.print("\nIt was successfully loginned. Welcome to our page");
+                  sb.append("<h2>It was successfully loginned. Welcome to our page</h2>");
+                  sb.append("<br>dear user "+name);
             } else {
-                pr.print("\nLogin failed. try again!");
-              //  req.getRequestDispatcher("index.html").forward(req,resp);
+                  sb.append("<h2>Login failed. try again!</h2>");
             }
         }
         if(action.equals("Register")){
                 boolean flag = service.register(name,password,gmail,inputDate);
             if(flag) {
-                pr.print("\nIt was successfully registered. Congratulations!\n");
+                 sb.append("<h2>It was successfully registered. Congratulations!</h2>");
+                 sb.append("<br><b>Keep this information!</b>");
+                 sb.append(service.getUserByAnyInfo(name));
             }else{
-                pr.print("\nRegister failed! Try again! \n");
+                sb.append("<h3>Register failed! Try again!<h3>");
                 //req.getRequestDispatcher("index.html").forward(req,resp);
             }
         }
         //pr.print("crossed Register "+action.equals("Register")+"<br>");
         if(action.equals("Get user")){
-            User user = service.getUserByAnyInfo(name+"!:!"+gmail);
+            String id = req.getParameter("id");
+            User user = service.getUserByAnyInfo(name+"!:!"+gmail+"!:!"+id);
             if(user!=null){
-                pr.print("We found user:\n"+user.toString());
+                sb.append("<h3>We have found user:<h3>"+user.toString());
             }else{
-                pr.print("\n<h3>Unfortunately no user with name: "+name+" or gmail: "+gmail+"\n");
+                sb.append("<h3>Unfortunately no user with name: "+name+" or gmail: "+gmail+"</h3><br>");
             }
         }
+        sb.append("<br><br><i><a href=\"index.html\">Return to welcome page</a></i>");
+        req.setAttribute("answer", sb.toString());
+        req.getRequestDispatcher("result.jsp").forward(req,resp);
+
     }
 }
