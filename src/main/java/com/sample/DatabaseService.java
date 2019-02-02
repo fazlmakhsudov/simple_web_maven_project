@@ -4,9 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DatabaseService {
-    public void initialize(){
-        Users users = new Users();
-        if(!users.getDatabase().isEmpty()){
+    public static void initialize(){
+        if(!Users.getDatabase().isEmpty()){
             return ;
         }
        Date inputDate = new SimpleDateFormat("dd/MM/yyyy").getDateInstance().getCalendar().getTime();
@@ -16,16 +15,16 @@ public class DatabaseService {
         Users.addUser("Shirin","1234", "*@gmail.com", inputDate);
         Users.addUser("Karim","1234", "*@gmail.com", inputDate);
        }
-    public boolean login (String name, String password){
+    public static boolean login (String name, String password){
         if(name==null||!Users.checkUser(name)){
             return false;
         }
         User user = Users.getUser(name);
-        if(user.getPassword().equals(password)){
+        if(password!=null&&user.getPassword().equals(password)){
             return true;
         } else return false;
     }
-    public boolean register (String name, String password, String gmail, Date date){
+    public static boolean register (String name, String password, String gmail, Date date){
         if(Users.checkUser(name)){
             return false;
         }
@@ -34,13 +33,11 @@ public class DatabaseService {
         if(flag) return true;
         return false;
     }
-    public User getUserByAnyInfo(String param){
+    public static User getUserByAnyInfo(String param){
         String [] params = param.split("!:!");
         for(String par : params){
             if(par==null||par.trim().equals("")) continue;
-            System.out.println("first condition");
             if(par.trim().equals("*name*")||par.trim().equals("**@gmail.com")) continue;
-            System.out.println("second condition");
             if (Users.checkUser(par.trim())){
                 return Users.getUser(par);
             }

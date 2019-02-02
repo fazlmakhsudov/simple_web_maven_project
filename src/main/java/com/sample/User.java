@@ -6,10 +6,10 @@ public class User {
     private String name;
     private  String password;
     private String gmail;
-    private int id;
+    private String id;
     private Date date;
 
-    public User(int id, String name, String password, String gmail, Date date) {
+    public User(String id, String name, String password, String gmail, Date date) {
         this.name = name;
         this.password = password;
         this.gmail = gmail;
@@ -18,6 +18,10 @@ public class User {
     }
     public String getPassword() {
         return password;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

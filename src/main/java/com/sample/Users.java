@@ -9,7 +9,7 @@ public class Users {
     private static Map<String, User> database=new HashMap<String, User>();
     private static int ids = 0;
 
-    public Map<String, User> getDatabase() {
+    public static Map<String, User> getDatabase() {
         return database;
     }
 
@@ -18,9 +18,9 @@ public class Users {
         if(flag) return false;
         if(gmail.equals("")||gmail==null||gmail.equals("*@gmail.com")) gmail= name+ids+"@gmail.com";
         if(date ==null||date.toString()=="") date = Calendar.getInstance().getTime();
-        String key = ids+name+password+gmail;
+        String key = name+ids+password+gmail;
         key = key.toLowerCase();
-        User newUser = new User(ids,name,password,gmail,date);
+        User newUser = new User(name+ids,name,password,gmail,date);
         if(database.containsKey(key)) return false;
         database.put(key, newUser);
         ids++;
