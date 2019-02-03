@@ -8,8 +8,7 @@
 </h1>
 <%
 Object loginForm= request.getAttribute("needLoginForm");
-if(loginForm!=null){
-StringBuilder sb =new StringBuilder();
+if(loginForm==null || loginForm.equals("yes")){
     out.println("<form method=\"post\" action=\"login\"><br>");
     out.println("<h4>Name</h4> <input type=\"text\"  name=\"name\" value =\"*name*\" align=\"center\" size=\"15\">");
     out.println("<br><h4>Password</h4> <input type=\"password\"  name=\"password\" value =\"password\" align=\"center\">");

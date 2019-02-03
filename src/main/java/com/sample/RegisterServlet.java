@@ -34,7 +34,7 @@ import java.util.Date;
         } catch (Exception e) {
 
         }
-        User user = DatabaseService.getUserByName(name);
+        User user = DatabaseService.getUserByID(name);
         if(user!=null){
             req.setAttribute("needRegistrationForm", "yes");
             req.setAttribute("registrationAnswer","<h2>Registration is failed. Login has already been occupied!</h2><bt>");

@@ -7,8 +7,8 @@
      Registration page
  </h1>
  <%
- Object loginForm= request.getAttribute("needRegistrationForm");
- if(loginForm!=null){
+ Object registrationForm= request.getAttribute("needRegistrationForm");
+ if(registrationForm==null|| registrationForm.equals("yes")){
  StringBuilder sb =new StringBuilder();
      out.println("<form method=\"post\" action=\"registration\"><br>");
      out.println("<h4>Name</h4> <input type=\"text\"  name=\"name\" value =\"*name*\" align=\"center\" size=\"15\">");

@@ -10,46 +10,40 @@
     <packaging>war</packaging>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/3.1.0 -->
-         <dependency>
-             <groupId>javax.servlet</groupId>
+        <dependency>
+            <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
         <!--https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/4.0.1-->
         <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>javax.servlet-api</artifactId>-->
-            <!--<version>4.0.1</version>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>javax.servlet</groupId>-->
+        <!--<artifactId>javax.servlet-api</artifactId>-->
+        <!--<version>4.0.1</version>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
     </dependencies>
     <build>
-    <finalName>SampleServlet</finalName>
-    <plugins>
-        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin/2.2-->
-        <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>2.2</version>
-        </plugin>
-        <!--https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat8-maven-plugin/3.0-r1756463-->
-        <!--<plugin>-->
-            <!--<groupId>org.apache.tomcat.maven</groupId>-->
-            <!--<artifactId>tomcat8-maven-plugin</artifactId>-->
-            <!--<version>3.0-r1756463</version>-->
-        <!--</plugin>-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.0</version>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
+        <finalName>SampleServlet</finalName>
+        <plugins>
+            <!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin/2.2-->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
 
-    </plugins>
+        </plugins>
     </build>
 </project>

@@ -30,7 +30,11 @@ public class User {
 
     @Override
     public String toString() {
+        String date = "unknown";
+        String email = "unknown";
+        if(this.date!=null) date = this.date.toString();
+        if(this.email!=null) email = this.email;
         return "<br><h3>ID: "+id+"<br>Name: "+name+"<br> Email: "+ email +
-                "<br>Date of registration: "+date.toString()+"</h3>";
+                "<br>Date of registration: "+date+"</h3>";
     }
 }

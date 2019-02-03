@@ -8,35 +8,35 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(
-            name = "search",
-            urlPatterns = "/user"
-    )
-    public class SearchServlet extends HttpServlet {
+        name = "search",
+        urlPatterns = "/user"
+)
+public class SearchServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DatabaseService.initialize();
-        req.getRequestDispatcher("/search.jsp").forward(req,resp);
-     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+        String id = req.getParameter("id");
         String email = req.getParameter("email");
-        User user = DatabaseService.getUserByName(name);
-        if(user!=null){
-            req.setAttribute("searchAnswer","<h2>"+user+"</h2><br>");
-            req.getRequestDispatcher("/search.jsp").forward(req,resp);
+        User user =null;
+        if(id!=null){
+           user = DatabaseService.getUserByID(id);
+        }
+        if (user != null) {
+            req.setAttribute("searchAnswer", "<h2>" + user + "</h2><br>");
+            req.getRequestDispatcher("/search.jsp").forward(req, resp);
             return;
         }
-        user = DatabaseService.getUserByEmail(email);
-        if(user!=null){
-            req.setAttribute("searchAnswer","<h2>"+user+"</h2><br>");
-            req.getRequestDispatcher("/search.jsp").forward(req,resp);
+        if(email!=null){
+            user = DatabaseService.getUserByEmail(email);
+        }
+        if (user != null) {
+            req.setAttribute("searchAnswer", "<h2>" + user + "</h2><br>");
+            req.getRequestDispatcher("/search.jsp").forward(req, resp);
             return;
         }
-        req.setAttribute("needSearchForm","yes");
-        req.getRequestDispatcher("/search.jsp").forward(req,resp);
     }
+
+
 }
 
