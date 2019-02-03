@@ -16,7 +16,6 @@ import java.io.IOException;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DatabaseService.initialize();
-        req.setAttribute("needLoginForm", "yes");
         req.getRequestDispatcher("/login.jsp").forward(req,resp);
      }
 
@@ -24,7 +23,7 @@ import java.io.IOException;
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        User user = DatabaseService.getUserByAnyInfo(name);
+        User user = DatabaseService.getUserByName(name);
         if(user==null){
             req.setAttribute("needLoginForm", "yes");
             req.setAttribute("loginAnswer","<h2>User with such name is absence, type correctly or register at first!</h2><bt>");
@@ -33,7 +32,7 @@ import java.io.IOException;
         }
         boolean flag =DatabaseService.login(name,password);
         if(flag){
-            req.setAttribute("loginAnswer","<h2>Loginned successfully!</h2><bt>");
+            req.setAttribute("loginAnswer","<h2>Loginned successful!</h2><bt>");
         } else{
             req.setAttribute("loginAnswer","<h2>Loginned failed! Password is wrong</h2><bt>");
         }

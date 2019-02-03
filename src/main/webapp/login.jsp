@@ -7,7 +7,7 @@
     Login page
 </h1>
 <%
-String loginForm= (String) request.getAttribute("needLoginForm");
+Object loginForm= request.getAttribute("needLoginForm");
 if(loginForm!=null){
 StringBuilder sb =new StringBuilder();
     out.println("<form method=\"post\" action=\"login\"><br>");

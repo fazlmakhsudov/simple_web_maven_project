@@ -16,31 +16,33 @@ public class DatabaseService {
         Users.addUser("Karim","1234", "*@gmail.com", inputDate);
        }
     public static boolean login (String name, String password){
-        if(name==null||!Users.checkUser(name)){
+        if(!Users.checkUser(name)){
             return false;
         }
-        User user = Users.getUser(name);
-        if(password!=null&&user.getPassword().equals(password)){
+        User user = Users.getUserByName(name);
+        if(user.getPassword().equals(password)){
             return true;
         } else return false;
     }
     public static boolean register (String name, String password, String gmail, Date date){
-        if(Users.checkUser(name)){
+        if(Users.checkUser(name)&&!name.equals("")){
             return false;
         }
         boolean flag= Users.addUser(name,password,gmail, date);
-
         if(flag) return true;
         return false;
     }
-    public static User getUserByAnyInfo(String param){
-        String [] params = param.split("!:!");
-        for(String par : params){
-            if(par==null||par.trim().equals("")) continue;
-            if(par.trim().equals("*name*")||par.trim().equals("**@gmail.com")) continue;
-            if (Users.checkUser(par.trim())){
-                return Users.getUser(par);
-            }
+    public static User getUserByName(String name){
+        User user = null;
+        if(!name.equals("")){
+            user = Users.getUserByName(name);
+        }
+        return user;
+    }
+    public static User getUserByEmail(String email){
+        User user = null;
+        if(!email.equals("")){
+            user=Users.getUserByEmail(email);
         }
         return null;
     }

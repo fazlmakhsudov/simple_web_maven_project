@@ -19,7 +19,6 @@ import java.util.Date;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DatabaseService.initialize();
-        req.setAttribute("needRegistrationForm", "yes");
         req.getRequestDispatcher("/registration.jsp").forward(req,resp);
      }
 
@@ -27,7 +26,7 @@ import java.util.Date;
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        String gmail = req.getParameter("gmail");
+        String email = req.getParameter("email");
         Date inputDate =null;
         PrintWriter pr = resp.getWriter();
         try {
@@ -35,14 +34,14 @@ import java.util.Date;
         } catch (Exception e) {
 
         }
-        User user = DatabaseService.getUserByAnyInfo(name);
+        User user = DatabaseService.getUserByName(name);
         if(user!=null){
             req.setAttribute("needRegistrationForm", "yes");
             req.setAttribute("registrationAnswer","<h2>Registration is failed. Login has already been occupied!</h2><bt>");
             req.getRequestDispatcher("/registration.jsp").forward(req,resp);
             return;
         }
-        boolean flag =DatabaseService.register(name,password,gmail,inputDate);
+        boolean flag =DatabaseService.register(name,password,email,inputDate);
         if(flag){
             req.setAttribute("registrationAnswer","<h2>Registration is successful!</h2><bt>");
         } else{
