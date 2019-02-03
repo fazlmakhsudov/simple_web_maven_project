@@ -5,49 +5,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Users {
-    private static Map<String, User> database = new HashMap<String, User>();
-    private static int ids = 0;
+    private static Map<Integer, User> database = new HashMap<>();
+    private static int ids = 1;
 
-    public static Map<String, User> getDatabase() {
+    public static Map<Integer, User> getDatabase() {
         return database;
     }
 
     public static boolean addUser(String name, String password, String email, Date date) {
-        String key = name + ids;
-        key = key.toLowerCase();
-        User newUser = new User(name + ids, name, password, email, date);
-        if (database.containsKey(key)) return false;
-        database.put(key, newUser);
+
+        User newUser = new User(ids, name, password, email, date);
+        if (database.containsKey(ids)) return false;
+        database.put(ids, newUser);
         ids++;
         return true;
     }
 
-    public static boolean checkUser(String param) {
-        param = param.toLowerCase();
-        for (String s : database.keySet()) {
-            if (s.indexOf(param) != -1) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static User getUserByName(String name) {
-        name = name.toLowerCase();
-        for (String s : database.keySet()) {
-            if (s.indexOf(name) != -1) {
-                return database.get(s);
+        for (User user : database.values()) {
+            if (user.getName().equalsIgnoreCase(name)) {
+                return user;
             }
         }
         return null;
     }
 
     public static User getUserByEmail(String email) {
-        email = email.toLowerCase();
-        for (String name : database.keySet()) {
-            if (database.get(name).getEmail().indexOf(email) != -1) {
-                return database.get(name);
+        for (User user : database.values()) {
+            if (user.getEmail().equalsIgnoreCase(email)) {
+                return user;
             }
+        }
+        return null;
+    }
+
+    public static User getUserById(int id) {
+        if (database.containsKey(id)) {
+            return database.get(id);
         }
         return null;
     }

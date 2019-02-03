@@ -11,23 +11,23 @@ public class DatabaseService {
         Date inputDate = new SimpleDateFormat("dd/MM/yyyy").getDateInstance().getCalendar().getTime();
 
         Users.addUser("Rustam", "1234", "Rustam@gmail.com", inputDate);
-        Users.addUser("Ilhom", "1234", "*@gmail.com", inputDate);
-        Users.addUser("Shirin", "1234", "*@gmail.com", inputDate);
-        Users.addUser("Karim", "1234", "*@gmail.com", inputDate);
+        Users.addUser("Ilhom", "1234", "Ilhom@gmail.com", inputDate);
+        Users.addUser("Shirin", "1234", "Shirin@gmail.com", inputDate);
+        Users.addUser("Karim", "1234", "Karim@gmail.com", inputDate);
     }
 
     public static boolean login(String name, String password) {
-        if (!Users.checkUser(name)) {
+        User user = Users.getUserByName(name);
+        if (user==null) {
             return false;
         }
-        User user = Users.getUserByName(name);
         if (user.getPassword().equals(password)) {
             return true;
         } else return false;
     }
 
     public static boolean register(String name, String password, String gmail, Date date) {
-        if (Users.checkUser(name) && !name.equals("")) {
+        if (Users.getUserByName(name)!=null) {
             return false;
         }
         boolean flag = Users.addUser(name, password, gmail, date);
@@ -35,7 +35,7 @@ public class DatabaseService {
         return false;
     }
 
-    public static User getUserByID(String name) {
+    public static User getUserByName(String name) {
         User user = null;
         if (!name.equals("")) {
             user = Users.getUserByName(name);
@@ -45,8 +45,17 @@ public class DatabaseService {
 
     public static User getUserByEmail(String email) {
         User user = null;
-        if (!email.equals("")) {
+        if (email !=null) {
             user = Users.getUserByEmail(email);
+            return user;
+        }
+        return null;
+    }
+    public static User getUserById(int id) {
+        User user = null;
+        if (id>0) {
+            user = Users.getUserById(id);
+            return user;
         }
         return null;
     }

@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        User user = DatabaseService.getUserByID(name);
+        User user = DatabaseService.getUserByName(name);
         if (user == null) {
             req.setAttribute("needLoginForm", "yes");
             req.setAttribute("loginAnswer", "<h2>User with such name is absence, type correctly or register at first!</h2><bt>");
@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         boolean flag = DatabaseService.login(name, password);
+
         if (flag) {
             req.setAttribute("needLoginForm", "no");
             req.setAttribute("loginAnswer", "<h2>Loginned successful!</h2><bt>");
